@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Leaflet - SG Data Sandbox</title>
+
+
+	<script type="text/javascript" src="script/leaflet-src.js"></script>
+	<link rel="stylesheet" href="script/leaflet.css">
+
+	<script type="text/javascript" src="script/L.Icon.Pulse.js"/></script>
+	<link rel="stylesheet" href="script/L.Icon.Pulse.css" />
+
+	<!-- Cluster POINTs -->
+	<link rel="stylesheet" href="script/MarkerCluster.css" />
+	<link rel="stylesheet" href="script/MarkerCluster.Default.css" />
+	<script src="script/leaflet.markercluster-src.js"></script>
+
+	<!-- BaseMap Icon Layer -->	
+	<script type="text/javascript" src="script/iconLayers.js"></script>
+	<link rel="stylesheet" href="script/iconLayers.css">
+
+	<!-- TOC -->	
+	<link rel="stylesheet" href="script/styledLayerControl.css" />
+	<script src="script/styledLayerControl.js"></script>
+
+	<!-- Bottom Menu - Right Bottom -->	
+	<link rel="stylesheet" type="text/css" href="script/borderMenu_icons.css" />
+	<link rel="stylesheet" type="text/css" href="script/borderMenu.css" />
+	<script src="script/modernizr.custom.js"></script>
+
+	<!-- Search -->		
+	<link rel="stylesheet" href="script/leaflet-search.min.css" />
+	<link rel="stylesheet" href="script/leaflet-search_style.css" />
+	<script src="script/leaflet-search.min.js"></script>
+
+	<link rel="stylesheet" href="script/leaflet.contextmenu.css"/>
+	<script src="script/leaflet.contextmenu.js"></script>
+
+
+	<script type="text/javascript" src="map_providers.js"></script>
+
+	<script type="text/javascript" src="script/1_config.js"></script>
+	<script type="text/javascript" src="script/2_icons.js"></script>
+	<script type="text/javascript" src="script/5_function.js"></script>
+
+	<link rel="stylesheet" href="script/0_style.css" />
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            padding: 0.25rem;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #f0f0ff;
+        }
+
+            #map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+
+	.logoDSTA { 
+		font-family      :'Source Sans Pro', Helvetica, Arial, sans-serif;
+		font-size        : 30px;
+		line-height      : 90%;
+		position         : absolute;
+		left             : 50px;
+		top              : 10px;
+		z-index          : 1;
+		width            : 98pt; height: 70pt;
+//		color            : #fff0ff;
+		text-align       : center;
+//		background-color : #3366ff;
+	}
+        </style>
+
+
+	<!-- DATA HERE - START -->
+
+	<script src="data/geojson/land/geolf_busstops.json"></script>
+	<script src="data/geojson/land/geolf_childcare_P.json"></script>
+	<script src="data/geojson/land/geolf_foodcentre_P.json"></script>
+	<script src="data/geojson/land/geolf_hospital_all_P.json"></script>
+	<script src="data/geojson/land/geolf_market_P.json"></script>
+	<script src="data/geojson/land/geolf_mrtstation_P.json"></script>
+	<script src="data/geojson/land/geolf_policestation_P.json"></script>
+	<script src="data/geojson/land/geolf_SG_HDB_flats.json"></script>
+
+	<script src="data/geojson/land/geolf_schools_P.json"></script>
+	<script src="data/geojson/land/geolf_taxistand_list_P.json"></script>
+	<script src="data/geojson/land/geolf_shop_P.json"></script>
+	<script src="data/geojson/land/geolf_SG_wirelessSG_hotspots.json"></script>
+
+	<!--
+		<script src="data/geojson/flood_cam/geolf_SG_FloodCamera.json"></script>
+	-->
+	<script src="data/geojson/traffic_cam/geolf_TrafficCamera.json"></script>
+	<script src="data/geojson/land/geolf_dynamic_carparklots_P.json"></script>
+	<script src="data/geojson/land/geolf_dynamic_taxi_P.json"></script>
+
+	<script src="data/geojson/land/geolf_dynamic_BCA_P.json"></script>
+	<script src="data/geojson/land/geolf_dynamic_PUB_floodsensor_P.json"></script>
+	<script src="data/geojson/land/geolf_dynamic_traffic_news_P.json"></script>
+	<script src="data/geojson/land/geolf_dynamic_traffic_waze_P.json"></script>
+
+
+	<script src="data/geojson/land/geolf_pcn_L.json"></script>
+	<script src="data/geojson/land/geolf_LTA_cycling_L.json"></script>
+	<script src="data/geojson/land/geolf_mrt_lines_L.json"></script>
+
+	<script src="data/geojson/air/geolf_Runway.json"></script>
+	<script src="data/geojson/air/geolf_Drone_A.json"></script>
+	<script src="data/geojson/air/geolf_RestrictedAirspace_A.json"></script>
+	<script src="data/geojson/air/geolf_terminalApproaches_L.json"></script>
+
+	<script src="data/geojson/air/geolf_dynamic_airtracks_P.json"></script>
+	<script src="data/geojson/air/geolf_dynamic_notam_P.json"></script>
+
+	<script src="data/geojson/sea/geolf_dynamic_seatracks_P.json"></script>
+
+	<script src="data/geojson/sea/geolf_shippingRoutes.json"></script>
+	<script src="data/geojson/sea/geolf_Anchorage_A.json"></script>
+	<script src="data/geojson/sea/geolf_MarineTrafficZone_A.json"></script>
+	<script src="data/geojson/sea/geolf_lighthouse_P.json"></script>
+	<script src="data/geojson/sea/geolf_dynamic_ntm_P.json"></script>
+
+
+	<!-- HADR -->
+	<script src="data/geojson/weather/geolf_ASEAN_Historical_Hazards.json"></script>
+	<script src="data/geojson/weather/geolf_volcano.json"></script>
+	<script src="data/geojson/weather/geolf_alerts_gdacs.json"></script>
+	<script src="data/geojson/weather/geolf_alerts_pdc.json"></script>
+
+
+	<!-- DATA HERE - END -->
+
+
+
+	</head>
+	<body>
+
+
+		<div id="map"></div>
+
+		<script>
+//			var map = L.map('map').setView([1.35186, 103.82731], 12);
+
+			var map = L.map('map', {contextmenu: true, contextmenuItems: [
+				{text: 'Show coordinates',callback: showCoordinates},
+//				{text: 'Business Listings',callback: mapTileZXY},
+				{text: 'Google Streetview',callback: showGSV},
+			]}).setView([1.35186, 103.82731], 12);
+
+		
+
+			var layers = [];
+			for (var providerId in providers) {
+				layers.push(providers[providerId]);
+			}
+
+			var ctrl = L.control.iconLayers(layers).addTo(map);
+		</script>
+
+
+		<script type="text/javascript" src="script/4_overlays.js"></script>
+
+		<script>
+
+			var overlays = [
+				{
+					groupName : "Amenities",
+					expanded  : false,
+					layers    : { 
+						"Child-care"         : groupChildcare_P,
+						"HDB"                : groupHDBFlats_P,
+						"Market"             : groupMarket_P,
+//						"Hospital / Clinics" : groupHospital_P,
+						"Hospital / Clinics" : groupHospital_P,
+						"Food-centre"        : groupFoodCentre_P,
+						"Shop"               : groupShop_P,
+						"Wifi Hotspots"      : groupWirelessSG_P,
+						"Police"             : groupPolice_P,
+						"School"             : groupSchool_P,
+						"Cycling (LTA)"      : lyrgeoCycling_L,
+						"Park Connector"     : lyrgeoPCN_L,
+					}	
+				}, {
+					groupName : "Land Transport",
+					expanded  : false,
+					layers    : { 
+						"MRT / LRT"          : groupTrain_P,
+						"Train Lines"        : lyrgeoMRTLine_L,
+						"Bus Stops"          : groupBusStop_P,
+						"Taxi Stands"        : groupTaxi_P,
+						"Land - Roads "      : lyrgmLabels,
+					}	
+				}, {
+					groupName : "Civil Aviation",
+					expanded  : false,
+					layers    : { 
+						"CAAS Notice-Airmen"  : groupNOTAMDynamic_P,
+//						"Restricted Airspace" : lyrgeoRestricted_A,
+//						"Restricted (Drone)"  : lyrgeoDrone_A,
+						"Terminal Approaches" : lyrgeoTerminalApproach_L,
+						"Air - Runway (ICAO)" : lyrgeoRunway,
+						"Restricted Airspace" : groupRestrictedAirspace,
+
+					}	
+				}, {
+					groupName : "Marine Shipping",
+					expanded  : false,
+					layers    : { 
+						"Marine Zones"           : groupMarineZone,
+						"Navigation Aids"        : groupMarineAids,
+						"MPA Notice-Mariners"    : groupNTMDynamic_P,
+						"Basemap - NOAA Contour" : lyrMapNOAAContour,
+						"Basemap - SCS"          : lyrMapSCS,
+						"Basemap - Sea Charts"   : lyrMapSeaChart,
+						"Basemap - Transas"      : lyrMapTransasChart,
+						"Shipping Routes"       : lyrgeoShippingRoute_L,
+
+					}	
+				}, {
+					groupName : "Weather",
+					expanded  : true,
+					layers    : { 
+						"Disaster Alerts (PDC)" : lyrgeoPDC,
+						"Wave Height"           : lyrWeatherWaveHeight,
+						"Wind"                  : lyrWeatherWind,
+						"Precipitation"         : lyrWeatherPrecipitation,
+						"Pressure"              : lyrWeatherPressure,
+						"Temperature"           : lyrWeatherTemp,
+					}	
+				}, {
+					groupName : "Dynamic",
+					expanded  : false,
+					layers    : { 
+						"Cameras"               : groupCameras,
+						"Carpark Lot (HDB)"     : groupCarparkLot_P,
+						"Traffic Speed (QI)"    : lyrQITraffic,
+//						"Traffic Speed"         : lyrWMSMapSynq,	
+//						"Traffic News"          : groupTrafficNewsSG_P,
+						"Traffic News"	      : groupTrafficNews,
+						"Taxis"                 : groupTaxiDynamic_P,
+						"BCA Activity"          : groupBCA_P,
+						"PUB Sensor"            : groupPUB_FloodSensor_P,
+						"Google Traffic"        : lyrgmTraffic,
+						"Air (FlightRadar24)"   : groupAirDynamic_P,
+						"Sea (MarineTraffic)"   : groupSeaDynamic_P,
+					}	
+				}						 
+			];
+
+
+			var options = {
+				container_width       : "240px",
+				group_maxHeight       : "350px",
+ 				container_maxHeight   : "700px", 
+				exclusive             : false
+			};
+
+			var control = L.Control.styledLayerControl(null, overlays, options);
+			map.addControl(control);
+
+
+
+		</script>
+
+
+		<!-- Bottom-right menu -->
+		<div class="container">
+			<nav id="bt-menu" class="bt-menu">
+				<a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+				<ul>
+					<li><a href="#" onClick="window.open('http://www.clc.gov.sg/research/researchworkshops.htm', '_blank')" class="bt-icon icon-browser" title="Centre for Liveable Cites">Browser</a></li>
+					<li><a href="#" class="bt-icon icon-cd"  title="Record icon">Record</a></li>
+
+				</ul>
+				<ul>
+					<li><a href="#" onClick="window.open('http://www.nrf.gov.sg/funding-grants', '_blank')" class="bt-icon icon-newspaper" title="NRF Funding Grants">News</a></li>
+					<li><a href="#" onClick="window.open('http://www.spring.gov.sg/Growing-Business/Grant/Pages/capability-development-grant.aspx', '_blank')" class="bt-icon icon-picture">Add</a></li>
+					<li><a href="#" onClick="window.open('http://app.mof.gov.sg/mfeupdate/list_plan.asp', '_blank')" class="bt-icon icon-browser">Browser</a></li>
+					<li><a href="#" onClick="window.open('http://www.lta.gov.sg/apps/tender/default.aspx?scr=yes&Ref=&scrdate=1&fromdate=&todate=&keyword=', '_blank')" class="bt-icon icon-bubble">Chat</a></li>
+
+					<li><a href="#" onClick="window.open('http://www.pub.gov.sg/tenders/Pages/InteractiveMap.aspx', '_blank')" class="bt-icon icon-microwave">Delete</a></li>
+
+				</ul>
+			</nav>
+		</div>
+
+
+
+
+
+		<script src="script/classie.js"></script>
+		<script src="script/borderMenu.js"></script>
+
+
+<button onclick="startDemo()" accessKey="q" style="display: none;">Try it</button>
+
+		<a href='#' data-position='' data-zoom='6'>Overview (SEA)</a> &#183 
+
+<button onclick="map.setView(new L.LatLng(13.88075, 104.98535), 5);" accessKey="1" style="display: none;">Try it</button>
+
+<button onclick="map.setView(new L.LatLng(14.60618, 121.02402), 11); map.removeLayer(lyrWeatherWaveHeight); map.removeLayer(lyrWeatherTemp);  map.removeLayer(lyrWeatherPressure); map.addLayer(lyrgeoRunway);map.addLayer(lyrgmLabels);" accessKey="2" style="display: none;">Try it</button>
+
+<button onclick="map.setView(new L.LatLng(14.5688, 121.03037), 13); map.addLayer(groupAirDynamic_P); map.addLayer(groupSeaDynamic_P);" accessKey="3" style="display: none;">Try it</button>
+
+<button onclick="map.addLayer(groupTrafficNews); " accessKey="4" style="display: none;">Try it</button>
+
+<button onclick="map.setView(new L.LatLng(1.36233, 103.80109), 11); map.addLayer(lyrgmTraffic);" accessKey="5" style="display: none;">Try it</button>
+
+
+
+
+
+<script>
+function startDemo() {
+//    setTimeout( function(){ alert("Hello"); }, 3000);
+	setTimeout( function(){ map.addLayer(lyrQITraffic); }, 3000);
+	setTimeout( function(){ map.removeLayer(groupTrafficNews); }, 8000);
+	setTimeout( function(){ map.addLayer(groupCameras); }, 9000);
+}
+
+
+
+</script>
+
+		
+
+	</body>
+</html>
